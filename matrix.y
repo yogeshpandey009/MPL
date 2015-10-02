@@ -212,7 +212,7 @@ void yyerror(char *s) {
 }
 
 int main(void) {
-fp=fopen("proj.c","w");
+fp=fopen("generated.c","w");
 fprintf(fp,"#include<stdio.h>\n#include<string.h>\n\nvoid main()\n{\nint i,j,k;\n");
     yyparse();
     
