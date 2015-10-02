@@ -1,0 +1,10 @@
+MATRIX A(2,3);
+MATRIX B(3);
+MATRIX C(2,3);
+MATRIX C(3,4);
+D:={{1,2},{2,3}};
+INPUT (C);
+C := A ADD B ;
+C := A MUL B ;
+OUTPUT (C);
+EXIT
