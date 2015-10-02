@@ -2,9 +2,14 @@ MATRIX A(2,3);
 MATRIX B(3);
 MATRIX C(2,3);
 MATRIX C(3,4);
+MATRIX P(2,3);
 D:={{1,2},{2,3}};
+INPUT (A);
+INPUT (B);
 INPUT (C);
 C := A ADD B ;
-C := A MUL B ;
+C := A ADD C ;
+P := A MUL B ;
 OUTPUT (C);
+OUTPUT (P);
 EXIT

@@ -49,7 +49,7 @@ Declaration: MATRIX VAR LP SIZE comma SIZE RP sc  {     i=0;flag=0;
 						
 							}	
 							else {
-							printf("Multiple Declaration not Allowed\n");}
+							printf("Multiple Declaration of %s not Allowed\n", $2);}
 						}
 
 	     | MATRIX VAR LP SIZE RP sc {		i=0;flag=0;
@@ -63,7 +63,7 @@ Declaration: MATRIX VAR LP SIZE comma SIZE RP sc  {     i=0;flag=0;
 							fprintf(fp,"\n int %s[%d][%d];",$2,$4,$4);
 							}	
 							else {
-							printf("Multiple Declaration not Allowed\n");}
+							printf("Multiple Declaration of %s not Allowed\n", $2);}
 						};		
 Function: INPUT LP VAR RP sc	{ 	flag=0;i=0;
 					while(i<cnt) 
@@ -79,8 +79,8 @@ Function: INPUT LP VAR RP sc	{ 	flag=0;i=0;
 						while(i<cnt) 
 						{	if(strcmp($3,name[i])==0)
 								{
-								fprintf(fp,"\n\n for (int i=0;i<%d;i++)\n{",m[i]);
-								fprintf(fp,"\n for (int j=0;j<%d;j++)\n{",n[i]);
+								fprintf(fp,"\n\n for (i=0;i<%d;i++)\n{",m[i]);
+								fprintf(fp,"\n for (j=0;j<%d;j++)\n{",n[i]);
 								d="%d";
 								fprintf(fp,"\n scanf(\"%s\",&%s[i][j]);\n}\n}",d,$3);
 								}
@@ -106,8 +106,8 @@ Function: INPUT LP VAR RP sc	{ 	flag=0;i=0;
 						while(i<cnt) 
 						{	if(strcmp($3,name[i])==0)
 								{
-								fprintf(fp,"\n\n for (int i=0;i<%d;i++)\n{",m[i]);
-								fprintf(fp,"\n for (int j=0;j<%d;j++)\n{",n[i]);
+								fprintf(fp,"\n\n for (i=0;i<%d;i++)\n{",m[i]);
+								fprintf(fp,"\n for (j=0;j<%d;j++)\n{",n[i]);
 								new="\\n";
 								fprintf(fp,"\n printf(\"%s\",%s[i][j]);\n}printf(\"%s\");\n}",d,$3,new);
 								}
@@ -126,11 +126,10 @@ Function: INPUT LP VAR RP sc	{ 	flag=0;i=0;
 								{flag=1;}
 							i++;
 							} 
-							if(flag==0){
+							if(flag==1){
 							fprintf(fp,"\n int %s = %s;",$1,$3);				
-							}	
-							else {
-							printf("Multiple Declaration not Allowed\n");}
+							} else {
+							printf("Undefined Variable %s found\n", $1);}
 	 
 					}; 
 
@@ -148,12 +147,12 @@ Calculation: VAR assignop VAR ADD VAR sc	{i=0;x=0;x2=0;x3=0;y=0;y2=0;y3=0;
 							{ 
 							printf("Semantically Correct\n");
 
-							fprintf(fp,"\n\n for (int i=0;i<%d;i++)\n{",x);
-							fprintf(fp,"\n for (int j=0;j<%d;j++)\n{",y);
+							fprintf(fp,"\n\n for (i=0;i<%d;i++)\n{",x);
+							fprintf(fp,"\n for (j=0;j<%d;j++)\n{",y);
 							fprintf(fp,"\n %s[i][j] = %s[i][j] + %s[i][j];\n}\n}",$1,$3,$5);
 
 							}
-						else{printf("Order of Matrices do not match\n");}
+						else{printf("Order of Matrices of %s and %s do not match for addition\n", $3, $5);}
 						}
 							
 		|VAR assignop VAR SUB VAR sc 	{i=0;x=0;x2=0;x3=0;y=0;y2=0;y3=0;
@@ -175,7 +174,7 @@ Calculation: VAR assignop VAR ADD VAR sc	{i=0;x=0;x2=0;x3=0;y=0;y2=0;y3=0;
 
 							}
 
-						else{printf("Order of Matrices do not match\n");}
+						else{printf("Order of Matrices of %s and %s do not match for subtraction\n", $3, $5);}
 						}
 		|VAR assignop VAR MUL VAR sc	{i=0;x=0;x2=0;x3=0;y=0;y2=0;y3=0;
 							while(i<cnt)
@@ -196,7 +195,7 @@ Calculation: VAR assignop VAR ADD VAR sc	{i=0;x=0;x2=0;x3=0;y=0;y2=0;y3=0;
 							fprintf(fp,"\n %s[i][j] += %s[i][k] * %s[k][j];\n}\n}\n}",$1,$3,$5);
 
 							}
-						else{printf("Order of Matrices don't match\n");}
+						else{printf("Order of Matrices of %s and %s do not match for multiplication\n", $3, $5);}
 						};
 
 

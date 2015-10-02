@@ -3,12 +3,12 @@
 
 void main()
 {
-
+int i,j,k;
 
  int A[2][3];
- int B[3][4];
- int C[2][4];
- int i,j,k=0;
+ int B[3][3];
+ int C[2][3];
+ int P[2][3];
 
  for (i=0;i<2;i++)
 {
@@ -20,7 +20,7 @@ void main()
 
  for (i=0;i<3;i++)
 {
- for (j=0;j<4;j++)
+ for (j=0;j<3;j++)
 {
  scanf("%d",&B[i][j]);
 }
@@ -28,21 +28,45 @@ void main()
 
  for (i=0;i<2;i++)
 {
- for (j=0;j<4;j++)
+ for (j=0;j<3;j++)
+{
+ scanf("%d",&C[i][j]);
+}
+}
+
+ for (i=0;i<2;i++)
+{
+ for (j=0;j<3;j++)
+{
+ C[i][j] = A[i][j] + C[i][j];
+}
+}
+
+ for (i=0;i<2;i++)
+{
+ for (j=0;j<3;j++)
 {
  for (k=0;j<3;j++)
 {
- C[i][j] += A[i][k] * B[k][j];
+ P[i][j] += A[i][k] * B[k][j];
 }
 }
 }
 
  for (i=0;i<2;i++)
 {
- for (j=0;j<4;j++)
+ for (j=0;j<3;j++)
 {
  printf("%d",C[i][j]);
+}printf("\n");
 }
+
+ for (i=0;i<2;i++)
+{
+ for (j=0;j<3;j++)
+{
+ printf("%d",P[i][j]);
+}printf("\n");
 }
 
 }
