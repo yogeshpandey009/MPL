@@ -1,4 +1,5 @@
 # MPL
+is a compiler that uses LEX and YACC and reads all types of Matrix operations and then performs Lexical Analysis, Syntactic Analysis, Semantic Analysis, Code generation & Optimization. Thus the final code is generated in C language.
 commands to execute
 ```sh
 $ lex matrix.l
